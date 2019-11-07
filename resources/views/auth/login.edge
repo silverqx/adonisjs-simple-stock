@@ -13,7 +13,7 @@
 
   <div class="product-container">
     @if(flashMessage('loginError'))
-      <span>{{ flashMessage('loginError') }}</span>
+      <span class="message">{{ flashMessage('loginError') }}</span>
     @endif
 
     <form action="{{ route('UserController.login') }}" method="post">
@@ -22,7 +22,7 @@
       <label for="email">Email</label>
       <input type="email" name="email" value="{{ old('email', '') }}">
       @if(hasErrorFor('email'))
-        <span>
+        <span class="message">
           {{ getErrorFor('email') }}
         </span>
       @endif
@@ -30,7 +30,7 @@
       <label for="password">Password</label>
       <input type="password" name="password">
       @if(hasErrorFor('password'))
-        <span>
+        <span class="message">
           {{ getErrorFor('password') }}
         </span>
       @endif

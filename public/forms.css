@@ -36,7 +36,7 @@ button {
   cursor: pointer;
 }
 
-span {
+span.message {
   display: block;
   background: yellow;
   padding: .3em;

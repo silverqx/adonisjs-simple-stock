@@ -13,7 +13,7 @@
 
   <div class="product-container">
     @if(flashMessage('message'))
-      <span>{{ flashMessage('message') }}</span>
+      <span class="message">{{ flashMessage('message') }}</span>
     @endif
 
     <form action="{{ route('products.update', { id: product.id }) }}?_method=put" method="post">
@@ -22,7 +22,7 @@
       <label for="title">Title</label>
       <input type="text" name="title" value="{{ old('title', product.title) }}" autofocus maxlength="255">
       @if(hasErrorFor('title'))
-        <span>
+        <span class="message">
           {{ getErrorFor('title') }}
         </span>
       @endif
@@ -30,7 +30,7 @@
       <label for="link">Link URL</label>
       <input type="text" name="link" value="{{ old('link', product.link) }}" maxlength="255">
       @if(hasErrorFor('link'))
-        <span>
+        <span class="message">
           {{ getErrorFor('link') }}
         </span>
       @endif
@@ -38,7 +38,7 @@
       <label for="description">Description</label>
       <input type="text" name="description" value="{{ old('description', product.description) }}" maxlength="255">
       @if(hasErrorFor('description'))
-        <span>
+        <span class="message">
           {{ getErrorFor('description') }}
         </span>
       @endif
