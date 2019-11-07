@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>
+    @!section('title')
+  </title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Language" content="en">
+
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta content="noindex,nofollow" name="robots">
+  <meta content="noindex,nofollow,snippet,noarchive" name="googlebot">
+
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrfToken }}">
+
+  <!-- Scripts -->
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+  <script src="{{ assetsUrl('DataMethods.js') }}" defer></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+  <link rel="dns-prefetch" href="//fonts.gstatic.com/">
+  <link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,700" rel="stylesheet">
+
+  <!-- Styles -->
+  {{ style('style') }}
+  @!section('extracss')
+
+  <link rel="shortcut icon" type="image/png" href="{{ assetsUrl('favicon-32x32.png') }}" sizes="32x32">
+</head>
+<body>
+  <header>
+    <a class="logo" href="/">
+      <img src="{{ assetsUrl('logo.svg') }}" alt="Adonisjs Logo">
+      <span>SimpleStock</span>
+    </a>
+
+    <nav>
+      <ul>
+        @loggedIn
+          <li><a href="{{ route('products.user_index') }}">Products</a></li>
+          <li><a href="{{ route('logout') }}">Logout</a></li>
+        @else
+          <li><a href="{{ route('home') }}">Products</a></li>
+          <li><a href="{{ route('login') }}">Login</a></li>
+          <li><a href="{{ route('register') }}">Register</a></li>
+        @endloggedIn
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    @!section('content')
+  </div>
+</body>
+</html>

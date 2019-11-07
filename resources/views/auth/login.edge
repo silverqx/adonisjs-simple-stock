@@ -1,0 +1,41 @@
+@layout('layouts.main')
+
+@section('title')
+  Login
+@endsection
+
+@section('extracss')
+  {{ style('forms') }}
+@endsection
+
+@section('content')
+  <h1>Login</h1>
+
+  <div class="product-container">
+    @if(flashMessage('loginError'))
+      <span>{{ flashMessage('loginError') }}</span>
+    @endif
+
+    <form action="{{ route('UserController.login') }}" method="post">
+      {{ csrfField() }}
+
+      <label for="email">Email</label>
+      <input type="email" name="email" value="{{ old('email', '') }}">
+      @if(hasErrorFor('email'))
+        <span>
+          {{ getErrorFor('email') }}
+        </span>
+      @endif
+
+      <label for="password">Password</label>
+      <input type="password" name="password">
+      @if(hasErrorFor('password'))
+        <span>
+          {{ getErrorFor('password') }}
+        </span>
+      @endif
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+@endsection

@@ -1,0 +1,67 @@
+@layout('layouts.main')
+
+@section('title')
+  Create Product
+@endsection
+
+@section('extracss')
+  {{ style('forms') }}
+@endsection
+
+@section('content')
+  <h1>Create Product</h1>
+
+  <div class="product-container">
+    @if(flashMessage('message'))
+        <span>{{ flashMessage('message') }}</span>
+    @endif
+
+    <form action="{{ route('ProductController.store') }}" method="post">
+      {{ csrfField() }}
+
+      <label for="title">Title</label>
+      <input type="text" name="title" value="{{ old('title', '') }}" autofocus maxlength="255">
+      @if(hasErrorFor('title'))
+        <span>
+          {{ getErrorFor('title') }}
+        </span>
+      @endif
+
+      <label for="link">Link URL</label>
+      <input type="text" name="link" value="{{ old('link', '') }}" maxlength="255">
+      @if(hasErrorFor('link'))
+        <span>
+          {{ getErrorFor('link') }}
+        </span>
+      @endif
+
+      <label for="description">Description</label>
+      <input type="text" name="description" value="{{ old('description', '') }}" maxlength="255">
+      @if(hasErrorFor('description'))
+        <span>
+          {{ getErrorFor('description') }}
+        </span>
+      @endif
+
+      <button type="submit">Create</button>
+    </form>
+  </div>
+
+  <h2>My Products</h2>
+
+  @each(product in products)
+    <div class="product-container">
+      {{--  <div class="blank"></div>  --}}
+      <div class="product-info">
+        <h3><a href="{{ product.link }}">{{ product.title }}</a></h3>
+        <p class="description">{{ product.description }}</p>
+        <ul>
+          <li><a href="{{ route('ProductController.edit', { id: product.id }) }}">Edit</a></li>
+          <li><a href="{{ route('ProductController.destroy', { id: product.id }) }}" data-method="delete">Delete</a></li>
+        </ul>
+      </div>
+    </div>
+  @else
+    <div class="empty-collection">Stock is Empty</div>
+  @endeach
+@endsection
